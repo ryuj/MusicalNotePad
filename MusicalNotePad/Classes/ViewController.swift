@@ -4,6 +4,7 @@ import AVFoundation
 class ViewController: UIViewController {
     
     var mAudioPlayer: AVAudioPlayer!
+    var mLabel: UILabel!
     let mNames: [String] = ["ド", "ド#", "レ", "レ#", "ミ", "ファ", "ファ#", "ソ", "ソ#", "ラ", "ラ#", "シ"]
     
     let ButtonWidth: CGFloat = 60
@@ -15,7 +16,6 @@ class ViewController: UIViewController {
     
     enum Tag: Int
     {
-        case text
         case buttonBase = 100
     }
 
@@ -23,6 +23,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         setupButtons()
+        setupLabel()
     }
 
     override func didReceiveMemoryWarning() {
@@ -67,9 +68,31 @@ class ViewController: UIViewController {
     
     @objc func didTapButton(sender: UIButton)
     {
-        print(sender.tag)
-        
         playSound()
+        
+        let index = sender.tag - Tag.buttonBase.rawValue
+        print(index)
+        
+        updateLabel(str: mNames[index])
+    }
+    
+    // MARK: - Label
+    
+    private func setupLabel()
+    {
+        mLabel = UILabel()
+        mLabel.frame = CGRect(x:0, y:240, width:self.view.frame.width, height:20)
+        mLabel.text = ""
+        mLabel.textAlignment = NSTextAlignment.center
+        mLabel.layer.borderColor = UIColor.blue.cgColor
+        mLabel.layer.borderWidth = 1
+        
+        self.view.addSubview(mLabel)
+    }
+    
+    private func updateLabel(str: String)
+    {
+        mLabel.text?.append(str)
     }
     
     // MARK: - Sound
