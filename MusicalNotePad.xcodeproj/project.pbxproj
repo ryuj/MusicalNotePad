@@ -12,6 +12,7 @@
 		6AD61091200B284800B053E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AD6108F200B284800B053E6 /* LaunchScreen.storyboard */; };
 		6AD6109B200B287800B053E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD61099200B287800B053E6 /* AppDelegate.swift */; };
 		6AD6109C200B287800B053E6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD6109A200B287800B053E6 /* ViewController.swift */; };
+		6AD6109F200B2F1100B053E6 /* Jump.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6AD6109E200B2F1100B053E6 /* Jump.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		6AD61092200B284800B053E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6AD61099200B287800B053E6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6AD6109A200B287800B053E6 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6AD6109E200B2F1100B053E6 /* Jump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Jump.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				6AD61098200B287800B053E6 /* Classes */,
+				6AD6109D200B2F1100B053E6 /* Resources */,
 				6AD6108A200B284800B053E6 /* Main.storyboard */,
 				6AD6108D200B284800B053E6 /* Assets.xcassets */,
 				6AD6108F200B284800B053E6 /* LaunchScreen.storyboard */,
@@ -70,6 +73,14 @@
 				6AD6109A200B287800B053E6 /* ViewController.swift */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		6AD6109D200B2F1100B053E6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6AD6109E200B2F1100B053E6 /* Jump.wav */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,6 +142,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AD6109F200B2F1100B053E6 /* Jump.wav in Resources */,
 				6AD61091200B284800B053E6 /* LaunchScreen.storyboard in Resources */,
 				6AD6108E200B284800B053E6 /* Assets.xcassets in Resources */,
 				6AD6108C200B284800B053E6 /* Main.storyboard in Resources */,
