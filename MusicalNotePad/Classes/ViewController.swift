@@ -5,6 +5,7 @@ class ViewController: UIViewController {
     
     var mAudioPlayer: AVAudioPlayer!
     var mLabel: UILabel!
+    var mIndexList: [Int] = []
     let mNames: [String] = ["ド", "ド#", "レ", "レ#", "ミ", "ファ", "ファ#", "ソ", "ソ#", "ラ", "ラ#", "シ"]
     
     let ButtonWidth: CGFloat = 60
@@ -18,11 +19,14 @@ class ViewController: UIViewController {
     {
         case buttonBase = 100
     }
+    
+    // MARK: -
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupButtons()
+        setupDeleteButton()
         setupLabel()
     }
 
@@ -31,9 +35,9 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: Button
+    // MARK: - Button
     
-    private func createButton(tag: Int, name: String, pos: CGPoint) -> UIButton
+    private func createButton(tag: Int, name: String, pos: CGPoint, selector: Selector) -> UIButton
     {
         let btn: UIButton = UIButton()
         btn.frame = CGRect(x:pos.x, y:pos.y, width:ButtonWidth, height:ButtonHeight)
@@ -42,7 +46,7 @@ class ViewController: UIViewController {
         btn.setTitleColor(UIColor.gray, for: UIControlState.highlighted)
         btn.backgroundColor = UIColor.black
         btn.tag = tag;
-        btn.addTarget(self, action: #selector(ViewController.didTapButton(sender:)), for: .touchUpInside)
+        btn.addTarget(self, action: selector, for: .touchUpInside)
         
         return btn
     }
@@ -51,7 +55,10 @@ class ViewController: UIViewController {
     {
         for (index, name) in mNames.enumerated()
         {
-            let btn: UIButton = createButton(tag: index + Tag.buttonBase.rawValue, name: name, pos: calcPos(index: index))
+            let btn: UIButton = createButton(tag: index + Tag.buttonBase.rawValue,
+                                             name: name,
+                                             pos: calcPos(index: index),
+                                             selector: #selector(ViewController.didTapButton(sender:)))
             self.view.addSubview(btn)
         }
     }
@@ -73,7 +80,29 @@ class ViewController: UIViewController {
         let index = sender.tag - Tag.buttonBase.rawValue
         print(index)
         
-        updateLabel(str: mNames[index])
+        addLabel(index: index)
+    }
+    
+    // MARK: - Delete Button
+    
+    private func setupDeleteButton()
+    {
+        let btn: UIButton = createButton(tag: 0, name: "<-", pos: CGPoint(x: 55, y: 200), selector: #selector(ViewController.didTapDeleteButton(sender:)))
+        btn.backgroundColor = UIColor.blue
+        self.view.addSubview(btn)
+    }
+    
+    @objc func didTapDeleteButton(sender: UIButton)
+    {
+        playSound()
+        
+        if mIndexList.isEmpty
+        {
+            return
+        }
+        
+        mIndexList.removeLast()
+        refreshLabel()
     }
     
     // MARK: - Label
@@ -81,18 +110,29 @@ class ViewController: UIViewController {
     private func setupLabel()
     {
         mLabel = UILabel()
-        mLabel.frame = CGRect(x:0, y:240, width:self.view.frame.width, height:20)
+        mLabel.frame = CGRect(x:0, y:280, width:self.view.frame.width, height:20)
         mLabel.text = ""
         mLabel.textAlignment = NSTextAlignment.center
-        mLabel.layer.borderColor = UIColor.blue.cgColor
+        mLabel.layer.borderColor = UIColor.gray.cgColor
         mLabel.layer.borderWidth = 1
         
         self.view.addSubview(mLabel)
     }
     
-    private func updateLabel(str: String)
+    private func addLabel(index: Int)
     {
-        mLabel.text?.append(str)
+        mIndexList.append(index)
+        mLabel.text?.append(mNames[index])
+    }
+    
+    private func refreshLabel()
+    {
+        mLabel.text = ""
+        
+        for index in mIndexList
+        {
+            mLabel.text?.append(mNames[index])
+        }
     }
     
     // MARK: - Sound
